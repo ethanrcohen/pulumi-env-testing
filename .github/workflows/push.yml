@@ -9,12 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Generate a token
-        id: generate-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: 1167133
-          private-key: ${{ secrets.APP_KEY }}
       - uses: actions/setup-node@v4
         with:
           node-version-file: package.json
@@ -24,5 +18,5 @@ jobs:
           command: up
           stack-name: dev
         env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          APP_KEY: ${{ secrets.APP_KEY }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
